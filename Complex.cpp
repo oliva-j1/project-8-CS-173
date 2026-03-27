@@ -57,27 +57,42 @@ Complex::Complex(double real, double imag) {
 //========================================================
 // destructor
 //========================================================
-
+Complex::~Complex(){
+}
 //========================================================
 // setReal access method
 //========================================================
-
+void Complex::setReal(double realnum){
+    a = realnum;
+}
 //========================================================
 // getReal access method
 //========================================================
-
+double Complex::getReal() const{
+    return a;
+}
 //========================================================
 // setImag
 //========================================================
-
+void Complex::setImag(double imagnum){
+    b = imagnum;
+}
 //========================================================
 // getImag
 //========================================================
-
+double Complex::getImag() const{
+    return b;
+}
 //========================================================
 // assignment operator
 //========================================================
-
+Complex Complex::operator=(const Complex& c){
+    if(this != &c){
+        a = c.a;
+        b = c.b;
+    }
+    return *this;
+}
 //========================================================
 // Method name: operator+
 // Description: Adds the calling Complex object to another
