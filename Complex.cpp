@@ -1,7 +1,11 @@
 //========================================================
-// put all group names here
+// Nick Fogle:     (612)-749-6653
+// Dante Robles:   (212)-641-0140
+// Jorge Oliva     (832)-499-0715
+// Ben Coverdale:  (302)-559-5133
+
 // Complex.cpp
-// Spring 2026
+// March 27, 2026
 // This file contains the class methods for the
 // Complex number class.
 //========================================================
@@ -15,32 +19,24 @@ using namespace std;
 //========================================================
 // default constructor
 //========================================================
-    void defaultConstructor(){
-        Complex c;
-        c.setReal(0);
-        c.setImag(0);
-    }
+Complex::Complex() {
+    setReal(0);
+    setImag(0);
+}
 //========================================================
 // copy constructor
 //========================================================
-    void copyConstructor(const Complex& c){
-       // Fetches real and imaginary number from existing complex number
-        realnum = c.getReal;
-        imagnum = c.getImag;
-        // This part copies the fetched values to the new complex number
-        Complex newC;
-        newC.setReal(realnum);
-        newC.setImag(imagnum);
-
-    }
+Complex::Complex(const Complex& other) {
+    setReal(other.getReal());
+    setImag(other.getImag());
+}
 //========================================================
 // Complex(a,b) constructor
 //========================================================
-    void complexConstructor(double real, double imag){
-        Complex c;
-        c.setReal(real);
-        c.setImag(imag);
-    }
+Complex::Complex(double real, double imag) {
+    setReal(real);
+    setImag(imag);
+}
 //========================================================
 // destructor
 //========================================================
@@ -68,26 +64,21 @@ using namespace std;
 //========================================================
 // addition operators
 //========================================================
-    void additionOperators(Complex& c1, Complex& c2){
-        // Fetch real and imaginary numbers from c1
-        double realnum1 = c1.getReal();
-        double imagnum1 = c1.getImag();
-        // Fetch real and imaginary numbers from c2
-        double realnum2 = c2.getReal();
-        double imagnum2 = c2.GetImag();
-        // Add real numbers
-        double realsum = realnum1 + realnum2;
-        // Add imaginary numbers
-        double imagsum = imagnum1 + imagnum2;
-        // Create sum structure
-        Complex sum
-        sum.setReal(realsum);
-        sum.setImag(imagsum);
-    }
+Complex Complex::operator+(const Complex& other) const {
+    Complex result;
+    result.setReal(getReal() + other.getReal());
+    result.setImag(getImag() + other.getImag());
+    return result;
+}
 //========================================================
 // subtraction operators
 //========================================================
-
+Complex Complex::operator-(const Complex& other) const {
+    Complex result;
+    result.setReal(getReal() - other.getReal());
+    result.setImag(getImag() - other.getImag());
+    return result;
+}
 //========================================================
 // multiplication operators
 //========================================================
