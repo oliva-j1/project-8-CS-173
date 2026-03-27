@@ -289,15 +289,6 @@ Complex Complex::operator/(const Complex& other) const {
 // overload << for cout
 //========================================================
 ostream& operator<<(ostream& os, const Complex& c){
-    /*
-    if(c.getImag()<0){
-        os << c.getReal() << "" << c.getImag() << "i"; // Shows negative sign when b < 0 by leaving sign blank
-        return os;
-    }
-    os << c.getReal() << "+" << c.getImag() << "i";
-    return os;
-    */  
-
     if(c.getReal()==0 && c.getImag()==0){ // If a and b are 0 output "0"
         os << "0";
     }
@@ -317,13 +308,13 @@ ostream& operator<<(ostream& os, const Complex& c){
     }
     else if(c.getReal()!=0 && c.getImag()<0){ // If b is negative trigger further processing
         if(c.getImag()==-1){ // if b equals -1 print a-i
-            os << c.getReal() << "" << "-i";
+            os << c.getReal() << "-i";
         }
         else{
-            os << c.getReal() << "" << c.getImag() << "i"; // If b is negative but not -1 print negative sign
+            os << c.getReal() << c.getImag() << "i"; // If b is negative but not -1 print negative sign
         }
     }
-    else if(c.getReal()!=0 && c.getImag()==1){ // If a exists and b equals one print a+i
+    else if(c.getImag()==1){ // If a exists and b equals one print a+i
         os << c.getReal() << "+" << "i";
     }
 
