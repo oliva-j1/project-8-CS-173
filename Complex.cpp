@@ -94,6 +94,10 @@ Complex Complex::operator=(const Complex& c){
     return *this;
 }
 //========================================================
+// Addition Operators
+//========================================================
+
+//========================================================
 // Method name: operator+
 // Description: Adds the calling Complex object to another
 // Complex object and returns the sum.
@@ -105,13 +109,34 @@ Complex Complex::operator=(const Complex& c){
 // The calling object is not changed.
 //========================================================
 Complex Complex::operator+(const Complex& other) const {
-    Complex result;
-    result.setReal(getReal() + other.getReal());
-    result.setImag(getImag() + other.getImag());
-    return result;
+    Complex sum;
+    sum.setReal(getReal() + other.getReal());
+    sum.setImag(getImag() + other.getImag());
+    return sum;
 }
+
+// Addition of complex number + integer:
+Complex Complex::operator+(int integer) const{
+    Complex sum;
+    sum.setReal(getReal() + integer);
+    sum.setImag(getImag()); // Imaginary part does not change
+    return sum;
+}
+
+// Addition of complex number + double:
+Complex Complex::operator+(double doublenum) const{
+    Complex sum;
+    sum.setReal(getReal() + doublenum);
+    sum.setImag(getImag()); // Imaginary part does not change
+    return sum;
+}
+
 //========================================================
-// Method name: operator-
+// Subtraction Operators
+//========================================================
+
+//========================================================
+// Method name: Complex by Complex subtraction
 // Description: Subtracts another Complex object from the
 // calling Complex object and returns the difference.
 // Parameters: other, a const Complex reference representing
@@ -122,11 +147,42 @@ Complex Complex::operator+(const Complex& other) const {
 // imaginary parts. The calling object is not changed.
 //========================================================
 Complex Complex::operator-(const Complex& other) const {
-    Complex result;
-    result.setReal(getReal() - other.getReal());
-    result.setImag(getImag() - other.getImag());
-    return result;
+    Complex difference;
+    difference.setReal(getReal() - other.getReal());
+    difference.setImag(getImag() - other.getImag());
+    return difference;
 }
+
+//========================================================
+// Method name: Complex by Integer Subtraction
+//========================================================
+Complex Complex::operator-(int integer) const{
+    Complex difference;
+    difference.setReal(getReal() - integer);
+    difference.setImag(getImag()); // Imaginary part does not change
+    return difference;
+}
+
+//========================================================
+// Method name: Complex by Double Subtraction
+//========================================================
+Complex Complex::operator-(double doublenum) const{
+    Complex difference;
+    difference.setReal(getReal() - doublenum);
+    difference.setImag(getImag()); // Imaginary part does not change
+    return difference;
+}
+
+//========================================================
+// Method name: Unary Minus (flips sign)
+//========================================================
+Complex Complex::operator-() const{
+    Complex flipped;
+    flipped.setReal(getReal()*(-1));
+    flipped.setImag(getImag()*(-1));
+    return flipped;
+}
+
 //========================================================
 // multiplication operators
 //========================================================
