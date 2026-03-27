@@ -177,9 +177,17 @@ Complex Complex::operator-(double doublenum) const{
 // Method name: Unary Minus (flips sign)
 //========================================================
 Complex Complex::operator-() const{
+    double a = getReal();
+    double b = getImag();
     Complex flipped;
     flipped.setReal(getReal()*(-1));
     flipped.setImag(getImag()*(-1));
+    if (a==0){
+        flipped.setReal(0);
+    }
+    if (b==0){
+        flipped.setImag(0);
+    }
     return flipped;
 }
 
@@ -277,6 +285,10 @@ Complex Complex::operator/(const Complex& other) const {
 // overload << for cout
 //========================================================
 ostream& operator<<(ostream& os, const Complex& c){
+    if(c.getImag()<0){
+        os << c.getReal() << "" << c.getImag() << "i"; // Shows negative sign when b < 0 by leaving sign blank
+        return os;
+    }
     os << c.getReal() << "+" << c.getImag() << "i";
     return os;
 }
