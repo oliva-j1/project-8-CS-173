@@ -305,7 +305,15 @@ ostream& operator<<(ostream& os, const Complex& c){
         os << c.getReal();
     }
     else if(c.getReal()==0 && c.getImag()!=0){ // If b is the only value output b
-        os << c.getImag() << "i";
+        if(c.getImag()==1){
+            os << "i";
+        }
+        else if(c.getImag()==-1){
+            os << "-i";
+        }
+        else{
+            os << c.getImag() << "i";
+        }
     }
     else if(c.getReal()!=0 && c.getImag()<0){ // If b is negative trigger further processing
         if(c.getImag()==-1){ // if b equals -1 print a-i
