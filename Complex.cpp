@@ -130,11 +130,69 @@ Complex Complex::operator-(const Complex& other) const {
 //========================================================
 // multiplication operators
 //========================================================
-
+// Multiplying two complex numbers:
+Complex Complex::operator*(const Complex& other) const {
+    // Complex number multiplication: (a+bi)*(c+di) = (ac-bd) + (ad+bc)i
+    // Fetch a, b, c, d values
+    double a = getReal();
+    double b = getImag();
+    double c = other.getReal();
+    double d = other.getImag();
+    // Perform math to find product
+    double realPart = (a*c) - (b*d);
+    double imagPart = (a*d) + (b*c);
+    // Initialize result object and assign calculated values
+    Complex product;
+    product.setReal(realPart);
+    product.setImag(imagPart);
+    // Return product
+    return product;
+}
+// Multiplying a complex number by a integer:
+Complex Complex::operator*(int integer) const {
+    // integer*complex number (a+bi) = int*a+(int*b)i
+    // Initialize result object, calculate, and assign values
+    Complex integerProduct;
+    integerProduct.setReal(getReal()*integer);
+    integerProduct.setImag(getImag()*integer);
+    return integerProduct;
+}
+// Multiplying a complex number by a double:
+Complex Complex::operator*(double doublenum) const {
+    // double*complex number (a+bi) = double*a + (double*b)i
+    //Initialize result object, calculate, and assign values
+    Complex doubleProduct;
+    doubleProduct.setReal(getReal()*doublenum);
+    doubleProduct.setImag(getImag()*doublenum);
+    return doubleProduct;
+}
 //========================================================
 // division operators
 //========================================================
-
+Complex Complex::operator/(const Complex& other) const {
+    // Complex number division: real part: (ac + bd)/(c^2 + d^2) | imaginary part: (bc - ad)/(c^2 + d^2)
+    // Fetch a, b, c, d values
+    double a = getReal();
+    double b = getImag();
+    double c = other.getReal();
+    double d = other.getImag();
+    // Calculate denominator (c^2 + d^2)
+    double denom = (c*c) + (d*d);
+    // If dividing by 0 return the default (0,0) vector
+    if(denom == 0){
+        return Complex();
+    }
+    // Calculate real part of the quotient
+    double realPart = ((a*c) + (b*d)) / denom;
+    // Calculate imaginary part of the quotient
+    double imagPart = ((b*c) - (a*d)) / denom;
+    // Initalize result object and assign calculated values
+    Complex quotient;
+    quotient.setReal(realPart);
+    quotient.setImag(imagPart);
+    // Return quotient
+    return quotient;
+}
 //========================================================
 // exponentiation
 //========================================================
@@ -162,3 +220,7 @@ Complex Complex::operator-(const Complex& other) const {
 //========================================================
 // overload << for cout
 //========================================================
+ostream& operator<<(ostream& os, const Complex& c){
+    os << c.getReal() << "+" << c.getImag() << "i";
+    return os;
+}
