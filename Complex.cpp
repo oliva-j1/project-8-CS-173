@@ -257,6 +257,35 @@ Complex Complex::operator/(const Complex& other) const {
     // Return quotient
     return quotient;
 }
+
+// Divide by an integer
+Complex Complex::operator/(int integer) const{
+    double a = getReal();
+    double b = getImag();
+    // Divide both parts by integer
+    Complex quotient; // Initialize quotient object
+    quotient.setReal(a/integer);
+    quotient.setImag(b/integer);
+    return quotient;
+
+}
+
+//========================================================
+// Method Name: Divide Complex by Double Number
+//========================================================
+Complex Complex::operator/(double doublenum) const{
+    double a = getReal();
+    double b = getImag();
+    // Initialize quotient object
+    Complex quotient;
+    // Divide real and imaginary parts by doublenum and assign to quotient object
+    quotient.setReal(a/doublenum);
+    quotient.setImag(b/doublenum);
+    // Return quotient object
+    return quotient;
+
+}
+
 //========================================================
 // exponentiation
 //========================================================
