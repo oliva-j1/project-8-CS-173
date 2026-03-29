@@ -348,11 +348,102 @@ bool Complex::operator!=(const Complex& c) const{
 //========================================================
 // overload >> for cin
 //========================================================
-//istream& operator>>(istream& is, Complex& c){
-    // add code here. needs to read string and take numbers.
-    // Maybe use a search that looks for either + or - and then takes all values to the left of it
-    // And then it searches for "i" and finds all values between the known + or - index and the "i" index
-//}
+// Method name: Input operator (operator>>)
+// Description: Reads a complex number from an input stream
+// in string form (for example: "a+bi", "a-bi", "bi", "a",
+// "i", "-i", or forms like "2+-i") and parses it into
+// real and imaginary components.
+// Parameters:
+//   inputStream - reference to an input stream (istream&)
+//                 used to read user input.
+//   complexNum  - reference to a Complex object (Complex&)
+//                 that will be modified to store the
+//                 parsed real and imaginary values.
+// Return value:
+//   Returns the input stream (istream&) to allow chaining
+//   of input operations. The Complex object complexNum is
+//   modified directly through the reference parameter.
+//========================================================
+istream& operator>>(istream& inputStream, Complex& complexNum){
+    string inputString;
+    inputStream >> inputString;
+
+    // Handle special cases: i, +i, -i
+    if(inputString == "i" || inputString == "+i"){
+        complexNum.setReal(0);
+        complexNum.setImag(1);
+        return inputStream;
+    }
+    else if(inputString == "-i"){
+        complexNum.setReal(0);
+        complexNum.setImag(-1);
+        return inputStream;
+    }
+
+    // If the input contains i, it has an imaginary part
+    if(inputString.find('i') != string::npos){
+        inputString.pop_back();   // Remove trailing 'i'
+
+        // Find separator between real and imaginary parts
+        // Start at index 1 so a leading sign is not mistaken
+        // for the separator.
+        int separatorIndex = -1;
+        for(int currentIndex = 1; currentIndex < inputString.length(); currentIndex++){
+            if(inputString[currentIndex] == '+' || inputString[currentIndex] == '-'){
+                separatorIndex = currentIndex;
+                break;
+            }
+        }
+
+        // No separator means the value is purely imaginary
+        if(separatorIndex == -1){
+            if(inputString == "+"){
+                complexNum.setReal(0);
+                complexNum.setImag(1);
+            }
+            else if(inputString == "-"){
+                complexNum.setReal(0);
+                complexNum.setImag(-1);
+            }
+            else{
+                complexNum.setReal(0);
+                complexNum.setImag(stod(inputString));
+            }
+        }
+        // Separator found, so split into real and imaginary parts
+        else{
+            string realString = inputString.substr(0, separatorIndex);
+            string imagString = inputString.substr(separatorIndex);
+
+            double realPart = stod(realString);
+            double imaginaryPart;
+
+            if(imagString == "+" || imagString == "++"){
+                imaginaryPart = 1;
+            }
+            else if(imagString == "-" || imagString == "+-"){
+                imaginaryPart = -1;
+            }
+            else if(imagString == "--"){
+                imaginaryPart = 1;
+            }
+            else{
+                imaginaryPart = stod(imagString);
+            }
+
+            complexNum.setReal(realPart);
+            complexNum.setImag(imaginaryPart);
+        }
+    }
+    // No i means the value is purely real
+    else{
+        complexNum.setReal(stod(inputString));
+        complexNum.setImag(0);
+    }
+
+    return inputStream;
+}
+
 //========================================================
 // overload << for cout
 //========================================================
