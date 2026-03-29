@@ -289,7 +289,17 @@ Complex Complex::operator/(double doublenum) const{
 //========================================================
 // exponentiation
 //========================================================
-
+Complex Complex::operator^(int exponum) const{
+    double magnitude = std::sqrt((getReal()*getReal()) + (getImag()*getImag()));
+    double angle = std::atan(getImag()/getReal());
+    double magnitudePowered = std::pow(magnitude, exponum);
+    // Initialize Complex object
+    Complex power;
+    // Formula r^n(cos(n*theta) + isin(n*theta)), Calculate and assign to power object
+    power.setReal(magnitudePowered * std::cos(exponum * angle));
+    power.setImag(magnitudePowered * std::sin(exponum * angle));
+    return power;
+}
 //========================================================
 // operator~
 //========================================================
