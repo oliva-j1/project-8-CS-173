@@ -293,19 +293,48 @@ Complex Complex::operator/(double doublenum) const{
 //========================================================
 // operator~
 //========================================================
+// Method Name: Complex Conjugate Operator
+//========================================================
+Complex Complex::operator~() const{
+    Complex conjugate;
+    conjugate.setReal(getReal());
+    conjugate.setImag(getImag()*-1);
+    return conjugate;
+}
+
 
 //========================================================
 // abs
 //========================================================
-
+double Complex::abs() const{
+    return std::sqrt((a*a)+(b*b)); // Formula sqrt(a^2 + b^2)
+}
 //========================================================
 // equality operator
 //========================================================
+// Method Name: Equality Check
+bool Complex::operator==(const Complex& c) const{
+    if(getReal()==c.getReal() && getImag()==c.getImag()){
+        return true;
+    }
 
+    else{
+        return false;
+    }
+}
 //========================================================
 // inequality operator
 //========================================================
+// Method Name: Inequality Check
+bool Complex::operator!=(const Complex& c) const{
+    if(getReal()==c.getReal() && getImag()==c.getImag()){
+        return false;
+    }
 
+    else{
+        return true;
+    }
+}
 //========================================================
 // overload >> for cin
 //========================================================
