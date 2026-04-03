@@ -1,12 +1,15 @@
 //========================================================
-// Nick Fogle:     (612)-749-6653
-// Dante Robles:   (212)-641-0140
-// Jorge Oliva     (832)-499-0715
-// Ben Coverdale:  (302)-559-5133
-// Complex.cpp
+// Ben Coverdale, Jorge Oliva, Nick Fogle, Dante Robles
 // March 27, 2026
-// This file contains the class methods for the
-// Complex number class.
+// Complex.cpp
+// This file implements the Complex class, which represents
+// complex numbers of the form a + bi. It provides constructors,
+// accessor and mutator methods, overloaded arithmetic operators
+// (+, -, *, /, ^), comparison operators, and input/output stream
+// operators. The class supports operations between Complex
+// objects as well as interactions with integers and doubles,
+// allowing for flexible mathematical manipulation of complex
+// numbers.
 //========================================================
 
 #include "Complex.h"
@@ -27,6 +30,8 @@ Complex::Complex() {
     setReal(0);
     setImag(0);
 }
+
+
 //========================================================
 // Method name: copy constructor
 // Description: Creates a new Complex object as a copy of
@@ -41,6 +46,8 @@ Complex::Complex(const Complex& other) {
     setReal(other.getReal());
     setImag(other.getImag());
 }
+
+
 //========================================================
 // Method name: Complex(a,b) constructor
 // Description: Creates a Complex object with the given
@@ -54,31 +61,74 @@ Complex::Complex(double real, double imag) {
     setReal(real);
     setImag(imag);
 }
+
+
 //========================================================
 // destructor
 //========================================================
+//========================================================
+// Method name: destructor
+// Description: Destroys the Complex object. No dynamic
+// memory is used, so no special cleanup is required.
+// Parameters: none
+// Return value: none. The calling object is destroyed.
+//========================================================
 Complex::~Complex(){
 }
+
+
 //========================================================
 // setReal access method
+//========================================================
+//========================================================
+// Method name: setReal
+// Description: Sets the real part of the Complex number.
+// Parameters: realnum, a double representing the new real value.
+// Return value: void. The calling object is modified (hidden return).
 //========================================================
 void Complex::setReal(double realnum){
     a = realnum;
 }
+
+
 //========================================================
 // getReal access method
+//========================================================
+//========================================================
+// Method name: getReal
+// Description: Retrieves the real part of the Complex number.
+// Parameters: none
+// Return value: double. Returns the real component. The calling
+// object is not modified.
 //========================================================
 double Complex::getReal() const{
     return a;
 }
+
+
 //========================================================
 // setImag
+//========================================================
+//========================================================
+// Method name: setImag
+// Description: Sets the imaginary part of the Complex number.
+// Parameters: imagnum, a double representing the new imaginary value.
+// Return value: void. The calling object is modified (hidden return).
 //========================================================
 void Complex::setImag(double imagnum){
     b = imagnum;
 }
+
+
 //========================================================
 // getImag
+//========================================================
+//========================================================
+// Method name: getImag
+// Description: Retrieves the imaginary part of the Complex number.
+// Parameters: none
+// Return value: double. Returns the imaginary component. The calling
+// object is not modified.
 //========================================================
 double Complex::getImag() const{
     return b;
@@ -86,13 +136,31 @@ double Complex::getImag() const{
 //========================================================
 // assignment operator
 //========================================================
+//========================================================
+// Method name: operator=
+// Description: Assigns the values of another Complex object
+// to the calling object.
+// Parameters: c, a const Complex reference containing values to copy.
+// Return value: Complex. Returns the updated calling object.
+// The calling object is modified (hidden return).
+//========================================================
 Complex Complex::operator=(const Complex& c){
+    // Check for self-assignment (e.g., x = x)
+    // Makes sure that it is not copying onto itself
     if(this != &c){
+        // Copy the real part from the right-hand object (c)
         a = c.a;
+
+        // Copy the imaginary part from the right-hand object (c)
         b = c.b;
     }
+
+    // Return the current object by value
+    // *this refers to the calling object (left-hand side of assignment)
     return *this;
 }
+
+
 //========================================================
 // Addition Operators
 //========================================================
@@ -115,7 +183,13 @@ Complex Complex::operator+(const Complex& other) const {
     return sum;
 }
 
-// Addition of complex number + integer:
+//========================================================
+// Method name: operator+ (Complex + int)
+// Description: Adds an integer to the real part of the Complex number.
+// Parameters: integer, an int value.
+// Return value: Complex. Returns a new Complex object.
+// The calling object is not modified.
+//========================================================
 Complex Complex::operator+(int integer) const{
     Complex sum;
     sum.setReal(getReal() + integer);
@@ -123,7 +197,13 @@ Complex Complex::operator+(int integer) const{
     return sum;
 }
 
-// Addition of complex number + double:
+//========================================================
+// Method name: operator+ (Complex + double)
+// Description: Adds a double to the real part of the Complex number.
+// Parameters: doublenum, a double value.
+// Return value: Complex. Returns a new Complex object.
+// The calling object is not modified.
+//========================================================
 Complex Complex::operator+(double doublenum) const{
     Complex sum;
     sum.setReal(getReal() + doublenum);
@@ -154,7 +234,11 @@ Complex Complex::operator-(const Complex& other) const {
 }
 
 //========================================================
-// Method name: Complex by Integer Subtraction
+// Method name: operator- (Complex - int)
+// Description: Subtracts an integer from the real part of the Complex number.
+// Parameters: integer, an int value.
+// Return value: Complex. Returns a new Complex object.
+// The calling object is not modified.
 //========================================================
 Complex Complex::operator-(int integer) const{
     Complex difference;
@@ -164,7 +248,11 @@ Complex Complex::operator-(int integer) const{
 }
 
 //========================================================
-// Method name: Complex by Double Subtraction
+// Method name: operator- (Complex - double)
+// Description: Subtracts a double from the real part of the Complex number.
+// Parameters: doublenum, a double value.
+// Return value: Complex. Returns a new Complex object.
+// The calling object is not modified.
 //========================================================
 Complex Complex::operator-(double doublenum) const{
     Complex difference;
@@ -174,7 +262,12 @@ Complex Complex::operator-(double doublenum) const{
 }
 
 //========================================================
-// Method name: Unary Minus (flips sign)
+// Method name: operator- (unary)
+// Description: Negates both the real and imaginary parts
+// of the Complex number.
+// Parameters: none
+// Return value: Complex. Returns a new negated Complex object.
+// The calling object is not modified.
 //========================================================
 Complex Complex::operator-() const{
     double a = getReal();
@@ -191,10 +284,20 @@ Complex Complex::operator-() const{
     return flipped;
 }
 
+
 //========================================================
 // multiplication operators
 //========================================================
-// Multiplying two complex numbers:
+//========================================================
+// Method name: operator* (Complex * Complex)
+// Description: Multiplies the calling Complex object by
+// another Complex object using the formula
+// (a+bi)(c+di) = (ac - bd) + (ad + bc)i.
+// Parameters: other, a const Complex reference representing
+// the Complex number to multiply.
+// Return value: Complex. Returns a new Complex object
+// representing the product. The calling object is not modified.
+//========================================================
 Complex Complex::operator*(const Complex& other) const {
     // Complex number multiplication: (a+bi)*(c+di) = (ac-bd) + (ad+bc)i
     // Fetch a, b, c, d values
@@ -212,7 +315,14 @@ Complex Complex::operator*(const Complex& other) const {
     // Return product
     return product;
 }
-// Multiplying a complex number by a integer:
+
+//========================================================
+// Method name: operator* (Complex * int)
+// Description: Multiplies the Complex number by an integer.
+// Parameters: integer, an int value.
+// Return value: Complex. Returns a new scaled Complex object.
+// The calling object is not modified.
+//========================================================
 Complex Complex::operator*(int integer) const {
     // integer*complex number (a+bi) = int*a+(int*b)i
     // Initialize result object, calculate, and assign values
@@ -221,7 +331,14 @@ Complex Complex::operator*(int integer) const {
     integerProduct.setImag(getImag()*integer);
     return integerProduct;
 }
-// Multiplying a complex number by a double:
+
+//========================================================
+// Method name: operator* (Complex * double)
+// Description: Multiplies the Complex number by a double.
+// Parameters: doublenum, a double value.
+// Return value: Complex. Returns a new scaled Complex object.
+// The calling object is not modified.
+//========================================================
 Complex Complex::operator*(double doublenum) const {
     // double*complex number (a+bi) = double*a + (double*b)i
     //Initialize result object, calculate, and assign values
@@ -230,8 +347,19 @@ Complex Complex::operator*(double doublenum) const {
     doubleProduct.setImag(getImag()*doublenum);
     return doubleProduct;
 }
+
+
 //========================================================
 // division operators
+//========================================================
+//========================================================
+// Method name: operator/ (Complex / Complex)
+// Description: Divides the calling Complex number by another
+// Complex number using standard complex division.
+// Parameters: other, a const Complex reference.
+// Return value: Complex. Returns the quotient.
+// If division by zero occurs, returns (0,0).
+// The calling object is not modified.
 //========================================================
 Complex Complex::operator/(const Complex& other) const {
     // Complex number division: real part: (ac + bd)/(c^2 + d^2) | imaginary part: (bc - ad)/(c^2 + d^2)
@@ -258,7 +386,13 @@ Complex Complex::operator/(const Complex& other) const {
     return quotient;
 }
 
-// Divide by an integer
+//========================================================
+// Method name: operator/ (Complex / int)
+// Description: Divides both parts of the Complex number by an integer.
+// Parameters: integer, an int value (should not be 0).
+// Return value: Complex. Returns a new Complex object.
+// The calling object is not modified.
+//========================================================
 Complex Complex::operator/(int integer) const{
     double a = getReal();
     double b = getImag();
@@ -271,7 +405,11 @@ Complex Complex::operator/(int integer) const{
 }
 
 //========================================================
-// Method Name: Divide Complex by Double Number
+// Method name: operator/ (Complex / double)
+// Description: Divides both parts of the Complex number by a double.
+// Parameters: doublenum, a double value (should not be 0).
+// Return value: Complex. Returns a new Complex object.
+// The calling object is not modified.
 //========================================================
 Complex Complex::operator/(double doublenum) const{
     double a = getReal();
@@ -286,12 +424,21 @@ Complex Complex::operator/(double doublenum) const{
 
 }
 
+
 //========================================================
 // exponentiation
 //========================================================
+//========================================================
+// Method name: operator^
+// Description: Raises the Complex number to an integer power
+// using polar form.
+// Parameters: exponum, an int exponent.
+// Return value: Complex. Returns the powered Complex number.
+// The calling object is not modified.
+//========================================================
 Complex Complex::operator^(int exponum) const{
     double magnitude = std::sqrt((getReal()*getReal()) + (getImag()*getImag()));
-    double angle = std::atan(getImag()/getReal());
+    double angle = std::atan2(getImag(), getReal());
     double magnitudePowered = std::pow(magnitude, exponum);
     // Initialize Complex object
     Complex power;
@@ -300,10 +447,17 @@ Complex Complex::operator^(int exponum) const{
     power.setImag(magnitudePowered * std::sin(exponum * angle));
     return power;
 }
+
+
 //========================================================
 // operator~
 //========================================================
-// Method Name: Complex Conjugate Operator
+//========================================================
+// Method name: operator~
+// Description: Returns the complex conjugate (a - bi).
+// Parameters: none
+// Return value: Complex. Returns a new conjugate object.
+// The calling object is not modified.
 //========================================================
 Complex Complex::operator~() const{
     Complex conjugate;
@@ -316,13 +470,28 @@ Complex Complex::operator~() const{
 //========================================================
 // abs
 //========================================================
+//========================================================
+// Method name: abs
+// Description: Computes the magnitude of the Complex number.
+// Parameters: none
+// Return value: double. Returns sqrt(a^2 + b^2).
+// The calling object is not modified.
+//========================================================
 double Complex::abs() const{
     return std::sqrt((a*a)+(b*b)); // Formula sqrt(a^2 + b^2)
 }
+
+
 //========================================================
 // equality operator
 //========================================================
-// Method Name: Equality Check
+//========================================================
+// Method name: operator==
+// Description: Checks if two Complex numbers are equal.
+// Parameters: c, a const Complex reference.
+// Return value: bool. Returns true if both real and imaginary
+// parts match, otherwise false.
+//========================================================
 bool Complex::operator==(const Complex& c) const{
     if(getReal()==c.getReal() && getImag()==c.getImag()){
         return true;
@@ -332,10 +501,17 @@ bool Complex::operator==(const Complex& c) const{
         return false;
     }
 }
+
+
 //========================================================
 // inequality operator
 //========================================================
-// Method Name: Inequality Check
+//========================================================
+// Method name: operator!=
+// Description: Checks if two Complex numbers are not equal.
+// Parameters: c, a const Complex reference.
+// Return value: bool. Returns true if values differ.
+//========================================================
 bool Complex::operator!=(const Complex& c) const{
     if(getReal()==c.getReal() && getImag()==c.getImag()){
         return false;
@@ -345,6 +521,8 @@ bool Complex::operator!=(const Complex& c) const{
         return true;
     }
 }
+
+
 //========================================================
 // overload >> for cin
 //========================================================
@@ -444,8 +622,19 @@ istream& operator>>(istream& inputStream, Complex& complexNum){
     return inputStream;
 }
 
+
 //========================================================
 // overload << for cout
+//========================================================
+//========================================================
+// Method name: operator<<
+// Description: Outputs a Complex number in standard form
+// (a+bi, a-bi, i, etc.).
+// Parameters:
+//   os - reference to an output stream (ostream&)
+//   c  - const Complex reference to output
+// Return value: ostream&. Returns the stream to allow chaining.
+// The Complex object is not modified.
 //========================================================
 ostream& operator<<(ostream& os, const Complex& c){
     if(c.getReal()==0 && c.getImag()==0){ // If a and b are 0 output "0"
@@ -483,3 +672,16 @@ ostream& operator<<(ostream& os, const Complex& c){
     
     return os;
     }
+
+
+//========================================================
+// References
+// Khan Academy. "Complex Numbers (Part 1)"
+// https://www.youtube.com/watch?v=kpywdu1afas
+//
+// Khan Academy. "Complex Numbers (Part 2)"
+// https://www.youtube.com/watch?v=bPqB9a1uk_8
+//
+// C++ Reference. "atan2 - Arctangent of y/x"
+// https://en.cppreference.com/w/cpp/numeric/math/atan2
+//========================================================
